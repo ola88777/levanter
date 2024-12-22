@@ -12,10 +12,7 @@ const start = async () => {
     return stopInstance()
   }
   try {
-    logger.info('Database syncing...')
-    await DATABASE.sync()
     const bot = new Client()
-    await bot.init()
     await bot.connect()
   } catch (error) {
     logger.error(error)

@@ -11,7 +11,7 @@ bot(
       return await message.send(
         `> Example :\n- zushi ping, sticker\n\nwanna set all ? type list copy and paste the reply message\n- zushi copied_message`
       )
-    const z = await zushi(match, message.jid)
+    const z = await zushi(match, message.jid, message.id)
     if (!z) return await message.send(`*${match}* already set`)
 
     await message.send(
@@ -30,7 +30,7 @@ bot(
     type: 'logia',
   },
   async (message, match) => {
-    const z = await yami(message.jid)
+    const z = await yami(message.jid, message.id)
     if (!z || !z.length) return await message.send(`not set any`)
     await message.send(
       `*allowed commands for @${message.isGroup ? message.jid : jidToNum(message.jid)}*\n${z
@@ -49,8 +49,8 @@ bot(
   },
   async (message, match) => {
     if (!match) return await message.send('> Example :\n- ope ping, sticker\n- ope all')
-    const z = await ope(message.jid, match)
-    if (z === null) return await message.send(`not set *${match}*`)
+    const z = await ope(message.jid, match, message.id)
+    if (!z) return await message.send(`not set *${match}*`)
     if (z === 'all') return await message.send(`_removed all allowed commands_`)
     await message.send(
       `*removed commands for @${message.isGroup ? message.jid : jidToNum(message.jid)}*\n${z
